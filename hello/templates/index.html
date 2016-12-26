@@ -16,9 +16,6 @@
             }
 
             function doAjaxRequest(prefix) {
-                console.log("Getting suggestions...");
-                console.log(prefix);
-
                 let httpRequest = new XMLHttpRequest();
                 httpRequest.onreadystatechange = handleAjaxResponse;
                 httpRequest.open("GET", "./autocomplete/?prefix=" + prefix, true);
@@ -26,11 +23,8 @@
             }
 
             function handleAjaxResponse() {
-                console.log(this.readyState);
-                console.log(XMLHttpRequest.DONE);
                 if(this.readyState === XMLHttpRequest.DONE) {
                     if(this.status === 200) {
-                        console.log(this.responseText);
                         document.getElementById("output").innerHTML = this.responseText;
                     }
                 }
@@ -38,6 +32,13 @@
         </script>
     </head>
     <body>
+        <h1>autocomplete-service</h1>
+        <p>Autocomplete as a service. Get a list of autocomplete suggestions, by sending a HTTP GET request to:</p>
+
+        <pre>http://autocomplete-service.herokuapp.com/autocomplete/?prefix=auto</pre>
+        
+        <p>Use the input below for a sample!</p>
+
         <label for="prefix">Prefix: </label>
         <input id="prefix" name="prefix" type="text" onKeyUp="initiateSuggestionsRoundTrip(event.target.value);"/>
         <div id="output"></div>

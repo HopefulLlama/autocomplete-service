@@ -19,6 +19,7 @@ class Suggester:
 	def get_sub_map(self, prefix):
 		sub_map = self.word_map
 		for character in prefix:
+			character = character.lower()
 			if character in sub_map.keys():
 				sub_map = sub_map[character]
 			else:
